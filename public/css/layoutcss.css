@@ -1,0 +1,71 @@
+@charset "utf-8";
+/* CSS Document */
+body{
+	color:#000;
+	background-color:#FFF; 
+	font-family:"Comic Sans MS", cursive; 
+	font-size:14px;
+}
+<!--table{font-size:16px;}-->
+#header{
+	position:fixed; 
+	background-color:#fff; 
+	height:70px; 
+	width: 100%; 
+	clear:both; 
+	margin-top:-10px;
+}
+#container{
+	padding-left:17%;
+	float:left; 
+	clear:;
+	width:65%;
+}
+#sea{
+	float:left; 
+	margin-top:100px; 
+	border:3 double inset; 
+	position:; 
+	width:99%;
+}
+#summary{
+	font-family:"Comic Sans MS", cursive;
+	font-size:15px; 
+	font-style:italic;
+}
+#results{
+	font-family:"Times New Roman", Times, serif; 
+	font-size:16px;
+}
+#sidebar{
+	border:inset;
+	border-radius:5px;
+	position:fixed;
+	clear:right; 
+	width:20%; 
+	float:right;
+	margin-top:4.4%; 
+	background-color:#;
+	min-height:80.5%; 
+	color:#000;
+} 
+#footer{
+	margin-top:585px; 
+	position:fixed; 
+	width:100%; 
+	background-color:#FFF; 
+	color:#631B89;
+}
+.search{
+	width:100%
+}
+.list{
+	padding-right:25px;
+	padding-left:20px;
+	float:right;
+	clear:left;
+	line-height:20px;
+	font-family:"Comic Sans MS", cursive;
+	font-size:15px;
+}
+
