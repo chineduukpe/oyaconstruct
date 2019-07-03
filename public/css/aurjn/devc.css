@@ -1,0 +1,54 @@
+/*CHANGE DEFAULT LARAVEL PAGINATION LINK LIST COLOR  */
+.pagination > li > a,
+.pagination > li > span {
+    color: #a01; 
+
+}
+
+.page-item .active{
+    background-color: #a01;
+    border-color: #a01;
+    color: #fff;
+}
+
+.pagination > .active,
+.pagination > .active > a,
+.pagination > .active > a:focus,
+.pagination > .active > a:hover,
+.pagination > .active > span,
+.pagination > .active > span:focus,
+.pagination > .active > span:hover {
+    background-color: #a01;
+    border-color: #a01;
+}
+
+ul.list-striped{
+    list-style-type: none;
+    border: none;
+}
+
+ul.list-striped > li:nth-of-type(odd),
+ul.list-striped > li:nth-of-type(odd) > a{
+    background-color: #cccccc;
+    border: none;
+}
+
+
+ul.list-striped > li{
+    border-bottom: 1px solid rgb(211, 211, 211);
+    border: none;
+}
+
+ul.list-striped > li > a:hover,{
+    background-color: #eec9c9;
+    border-color: #fff;
+}
+
+
+/*ADD PADDING TO TOP NAV WHEN ON MOBILE  */
+@media (max-width: 785){
+    nav {
+        margin-top: 200px;
+    }
+
+}
