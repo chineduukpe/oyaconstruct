@@ -335,7 +335,7 @@ $(document).ready(() => {
     });
 
     // ADD A NEW PRICE AND SIZE TO A PRODUCT
-    $('#addProductPriceForm').submit(function(e){
+    $('#addProductPriceForm').submit(function (e) {
         e.preventDefault();
         let $this = $(this);
         let price = $this.find('input[name="price"]');
@@ -344,24 +344,24 @@ $(document).ready(() => {
         let url = $this.attr('action');
         let method = $this.attr('method').toUpperCase();
 
-        if (isFieldEmpty(price) || price < 1){
-            return useToast('error','PRICE','You have entered an invalid price.');
+        if (isFieldEmpty(price) || price < 1) {
+            return useToast('error', 'PRICE', 'You have entered an invalid price.');
         }
 
         console.log({
             product_id: product.val(),
             price: price.val(),
-            size_id : size,
+            size_id: size,
         })
         disableForms();
 
-        fr(url,method,
+        fr(url, method,
             {
                 product_id: parseInt(product.val()),
                 price: parseFloat(price.val()),
-                size_id : parseInt(size),
+                size_id: parseInt(size),
             }
-            )
+        )
             .then(res => {
                 console.log(res);
                 return res.json();
@@ -375,17 +375,17 @@ $(document).ready(() => {
                 }
                 price.val('');
                 alert(data.message)
-                return useToast('success','PRICE', 'Price has been successfully attached to the product');
+                return useToast('success', 'PRICE', 'Price has been successfully attached to the product');
             })
             .catch(err => {
                 disableForms(false);
-                return useToast('error','PRICE: ','A network error has occured. Please try again.');
+                return useToast('error', 'PRICE: ', 'A network error has occured. Please try again.');
             })
 
     });
 
     //DELETEING A PRODUCT
-    $('i .delete-product').click(function(e){
+    $('i .delete-product').click(function (e) {
         let $this = $(this);
         let id = $this.attr('id');
         console.log(id);
@@ -396,24 +396,52 @@ $(document).ready(() => {
         let url = $('#deleteProductModal').attr('action') + '/' + parseInt(id);
         console.log(url);
 
-        fgr(url,"GET")
+        fgr(url, "GET")
             .then(res => {
                 console.log(res);
                 return res.json();
             })
             .then(data => {
-                if (data.error){
+                if (data.error) {
                     alert(data.error);
-                    return useToast('error','PRODUCT',data.error);
+                    return useToast('error', 'PRODUCT', data.error);
                 }
                 console.log(data);
                 $('#product-parent' + id).remove()
                 alert(data.message);
-                return useToast('success','PRODUCT',data.message);
+                return useToast('success', 'PRODUCT', data.message);
             })
             .catch(e => {
                 alert('A network error occured');
-                return useToast('error','PRODUCT: ','A network error occured');
+                return useToast('error', 'PRODUCT: ', 'A network error occured');
             });
+    });
+
+
+    /*
+    * PAGE LEVEL SCRIPT
+    * VIEW PRODUCT ON MARKET
+    * */
+    let product_to_cart = {};
+    $('.product-alt-photo').click(function (e) {
+        let url = $(this).attr('src');
+
+        $('.product-alt-photo').removeClass('active');
+        e.currentTarget.classList.add('active');
+
+        let main_photo = $('#productMainPhoto');
+        fetchImageInBase64(url, main_photo);
+    });
+
+    $('.product-purchase-colour').click(function (e) {
+        $('.product-purchase-colour').removeClass('active');
+        e.currentTarget.classList.add('active');
+        product_to_cart.colour = parseInt($(this).attr('value'));
+        product_to_cart.product_id = parseInt($('#addToCartForm').find('input[name=productid]').attr('value'));
+        console.log(product_to_cart)
+    });
+
+    $('#addToCartForm').find('input[name=size]').click(function (e) {
+        product_to_cart.size = parseInt($(this).attr('value'))
     });
 });

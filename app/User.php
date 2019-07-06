@@ -46,6 +46,6 @@ class User extends Authenticatable
     */ 
     public function store()
     {
-        return $this->hasOne('App\Store','owneremail','email');
+        return $this->hasOne('App\store','owneremail','email');
     }
 }

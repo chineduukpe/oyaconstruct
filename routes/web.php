@@ -87,7 +87,7 @@ Route::get('product/storage/{filename}', function ($filename)
     //$response->header("Content-Type", $type);
 
     return $response;
-});
+})->name('image.get');
 
 Route::get('admin/edituser','UserController@edituser');
 Route::get('admin/updateuser','UserController@updateuser');
@@ -105,7 +105,7 @@ Route::get('getdiscount','ProductController@getdiscount');
 Route::get('flashsales','ProductController@flashsales');
 Route::get('getmore','ProductController@getmore');
 Route::get('shop','ProductController@shop');
-Route::get('/viewproduct/{id}', ['uses' =>'ProductController@singleproduct']);
+Route::get('/viewproduct/{id}', ['uses' =>'ProductController@singleproduct'])->name('product.view');
 
 // MANAGER ROUTES
 Route::get('/manager/home', function () {
@@ -152,4 +152,8 @@ Route::group(['middleware' => ['vendoronly','auth']],function(){
     Route::get('vendor/orders',['as' => 'vendor.orders', 'uses' => 'VendorController@orders']);
     // Route::get('vendor/products/update/quantity/{amount}',['as' => 'vendor.products.update.quantity', 'uses' => 'VendorController@updateProductQuantity']);
     // Route::get('api/vendor/products/{product_id}',['as' => 'api.vendor.products.single', 'uses' => 'VendorController@singleProductAPI']);
+});
+
+Route::get('/passwordz',function(){
+   return bcrypt('pandora007');
 });

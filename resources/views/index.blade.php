@@ -55,8 +55,13 @@
       <h5 class="my-0 mr-md-auto font-weight-normal"><img src="{{URL::asset('img/logo.png')}}" style="height:40px;"></h5>
       <nav class="my-2 my-md-0 mr-md-3">
         <a class="btn text-secondary" href="#" > <i class="fa fa-cart-plus"></i> Cart</a>
-      <a class="btn text-secondary" href="#becomeAVendor" data-toggle="modal"><i class="fa fa-register"></i>Become a Vendor</a>
+          @if(Auth::check())
+              @if(empty(Auth::user()->store()->get()->first()))
+                  <a class="btn text-secondary" href="#becomeAVendor" data-toggle="modal"><i class="fa fa-triangle"></i>Become a Vendor</a>
+              @endif
+          @endif
         @if(Auth::guest())
+      <a class="btn text-secondary" href="#becomeAVendor" data-toggle="modal"><i class="fa fa-register"></i>Become a Vendor</a>
       <a class="btn text-secondary" href="#mySignin" data-toggle="modal"><i class="fa fa-user"></i>Sign in</a>
       <a class="btn text-secondary" href="#mySignup" data-toggle="modal"><i class="fa fa-register"></i>Sign up</a>
       @else
@@ -93,7 +98,7 @@
             <a class="nav-link" href="#">Professional Services</a>
           </li>
           @if(Auth::check())
-          @if(Auth::user()->role != 'user')
+                @if(Auth::user()->role != 'user' && !empty(Auth::user()->store()->get()->first()))
           <li class="nav-item">
             <a class="nav-link" href="{{route('vendor.home')}}">My store</a>
           </li>

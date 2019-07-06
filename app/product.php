@@ -11,7 +11,7 @@ class product extends Model
     */
     public function store()
     {
-        return $this->belongsTo('App\Store','id','storeid');
+        return $this->belongsTo('App\Store','storeid','id');
     }
 
     public function sizes()

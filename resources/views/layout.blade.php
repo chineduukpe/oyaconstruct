@@ -111,7 +111,13 @@
         </form>
         <nav class="my-2 my-md-0 mr-md-3">
           <a class="btn text-secondary" href="#"> <i class="fa fa-cart-plus"></i> Cart</a>
-          <a class="btn text-secondary" href="#becomeAVendor" data-toggle="modal"><i class="fa fa-triangle"></i>Become a Vendor</a>          @if((Auth::guest()))
+          @if(Auth::check())
+            @if(empty(Auth::user()->store()->get()->first()) && Auth::user()->role !='user')
+               <a class="btn text-secondary" href="#becomeAVendor" data-toggle="modal"><i class="fa fa-triangle"></i>Become a Vendor</a>
+              @endif
+          @endif
+          @if((Auth::guest()))
+            <a class="btn text-secondary" href="#becomeAVendor" data-toggle="modal"><i class="fa fa-triangle"></i>Become a Vendor</a>
           <a class="btn text-secondary" href="#mySignin" data-toggle="modal"><i class="fa fa-user"></i>Sign in</a>
           <a class="btn text-secondary" href="#mySignup" data-toggle="modal"><i class="fa fa-register"></i>Sign up</a> @else
           @endif
@@ -147,11 +153,13 @@
             <li class="nav-item">
               <a class="nav-link" href="#">Professional Services</a>
             </li>
-            @if(Auth::check()) @if(Auth::user()->role != 'user')
+            @if(Auth::check())
+              @if(Auth::user()->role != 'user' && !empty(Auth::user()->store()->get()->first()))
             <li class="nav-item">
               <a class="nav-link" href="{{route('vendor.home')}}">My store</a>
             </li>
-            @endif @endif
+            @endif
+            @endif
           </ul>
         </div>
       </nav>
@@ -265,7 +273,7 @@
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header bg-danger text-white">
-              <h4 id="mySignupModalLabel">Become a <strong>Vendor</strong></h4>
+              <h4 id="mySignupModalLabel">Become a <strong>Vendor </strong></h4>
               <!-- <p>Create your own store on the go. And start selling instantly!</p> -->
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
@@ -398,6 +406,7 @@
         <!-- Copyright -->
         <div class="footer-copyright text-center py-3">© 2019:
           <a href="#">Oyaconstruct.com</a>
+
         </div>
         <!-- Copyright -->
 

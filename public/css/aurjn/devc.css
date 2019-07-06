@@ -39,16 +39,65 @@ ul.list-striped > li{
     border: none;
 }
 
-ul.list-striped > li > a:hover,{
+ul.list-striped > li > a:hover{
     background-color: #eec9c9;
     border-color: #fff;
 }
 
 
 /*ADD PADDING TO TOP NAV WHEN ON MOBILE  */
-@media (max-width: 785){
+@media (max-width: 785px){
     nav {
         margin-top: 200px;
     }
 
 }
+
+
+.alt-image-container{
+   height: 100px !important;
+}
+
+.alt-image{
+    height: 100px !important;
+    cursor: pointer;
+    /*width: 100% !important;*/
+}
+
+.product-alt-photo{
+    cursor: pointer;
+}
+
+#productMainPhoto{
+    max-width: 100%;
+}
+
+.product-alt-photo:hover,
+.product-alt-photo.active{
+    border: 2px solid #ff4040;;
+}
+
+.product-purchase-colour:hover,
+.product-purchase-colour.active
+{
+    border: 1px solid #ff4040;
+}
+
+/*START MAGNIFYING GLASS*/
+* {box-sizing: border-box;}
+
+.img-magnifier-container {
+    position: relative;
+}
+
+.img-magnifier-glass {
+    position: absolute;
+    border: 3px solid #000;
+    border-radius: 50%;
+    cursor: none;
+    /*Set the size of the magnifier glass:*/
+    width: 100px;
+    height: 100px;
+}
+
+/*END MAGNIGYING GLASS*/
