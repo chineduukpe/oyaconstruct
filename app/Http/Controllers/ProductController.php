@@ -270,7 +270,7 @@ class ProductController extends Controller
 
      public function getfeatured(Request $request){
 
-        $products=DB::table('products')->join('stores', 'products.storeid', '=', 'stores.id')->where("products.featured",'yes')->orderBy('products.created_at','desc')->paginate(8);
+        $products=DB::table('products')->select('products.*','stores.id as storeid')->join('stores', 'products.storeid', '=', 'stores.id')->where("products.featured",'yes')->orderBy('products.created_at','desc')->paginate(8);
         if ($request->ajax()) {
             $view = view('featuredproductsdata',['products' => $products])->render();
             return response()->json(['html'=>$view]);
@@ -279,7 +279,7 @@ class ProductController extends Controller
 
      public function featuredproducts(Request $request){
 
-        $products=DB::table('products')->join('stores', 'products.storeid', '=', 'stores.id')->where("products.featured",'yes')->orderBy('products.created_at','desc')->paginate(8);
+        $products=DB::table('products')->select('products.*','stores.id as storeid')->join('stores', 'products.storeid', '=', 'stores.id')->where("products.featured",'yes')->orderBy('products.created_at','desc')->paginate(8);
         if ($request->ajax()) {
             $view = view('featuredproductsdata',['products' => $products])->render();
             return response()->json(['html'=>$view]);
@@ -290,7 +290,7 @@ class ProductController extends Controller
 
      public function getdiscount(Request $request){
 
-        $products=DB::table('products')->join('stores', 'products.storeid', '=', 'stores.id')->where([["products.discount",'>','0']])->orderBy('products.created_at','desc')->paginate(8);
+        $products=DB::table('products')->select('products.*','stores.id as storeid')->join('stores', 'products.storeid', '=', 'stores.id')->where([["products.discount",'>','0']])->orderBy('products.created_at','desc')->paginate(8);
         if ($request->ajax()) {
             $view = view('flashdata',['products' => $products])->render();
             return response()->json(['html'=>$view]);
@@ -299,7 +299,7 @@ class ProductController extends Controller
 
      public function flashsales(Request $request){
 
-        $products=DB::table('products')->join('stores', 'products.storeid', '=', 'stores.id')->where([["products.discount",'>','0']])->orderBy('products.created_at','desc')->paginate(8);
+        $products=DB::table('products')->select('products.*','stores.id as storeid')->join('stores', 'products.storeid', '=', 'stores.id')->where([["products.discount",'>','0']])->orderBy('products.created_at','desc')->paginate(8);
         if ($request->ajax()) {
             $view = view('flashdata',['products' => $products])->render();
             return response()->json(['html'=>$view]);
@@ -309,7 +309,7 @@ class ProductController extends Controller
 
      public function getmore(Request $request){
 
-        $products=DB::table('products')->join('stores', 'products.storeid', '=', 'stores.id')->orderBy('products.created_at','desc')->paginate(12);
+        $products=DB::table('products')->select('products.*','stores.id as storeid')->join('stores', 'products.storeid', '=', 'stores.id')->orderBy('products.created_at','desc')->paginate(12);
         if ($request->ajax()) {
             $view = view('moredata',['products' => $products])->render();
             return response()->json(['html'=>$view]);
@@ -318,7 +318,7 @@ class ProductController extends Controller
 
      public function shop(Request $request){
 
-        $products=DB::table('products')->join('stores', 'products.storeid', '=', 'stores.id')->orderBy('products.created_at','desc')->paginate(12);
+        $products=DB::table('products')->select('products.*','stores.id as storeid')->join('stores', 'products.storeid', '=', 'stores.id')->orderBy('products.created_at','desc')->paginate(12);
         if ($request->ajax()) {
             $view = view('moredata',['products' => $products])->render();
             return response()->json(['html'=>$view]);
@@ -335,16 +335,16 @@ class ProductController extends Controller
         if($request->has('subcatid')){
            $catid=$request->subcatid;
            if($state==""){
-                $products=DB::table('products')->join('stores', 'products.storeid', '=', 'stores.id')->where('subcategory',$catid)->orderBy('products.created_at','desc')->paginate(12); 
+                $products=DB::table('products')->select('products.*','stores.id as storeid')->join('stores', 'products.storeid', '=', 'stores.id')->where('subcategory',$catid)->orderBy('products.created_at','desc')->paginate(12); 
            }else{
             $products=DB::table('products')->join('stores', 'products.storeid', '=', 'stores.id')->where([['products.subcategory','=',$catid],['stores.state','=',$state]])->orderBy('products.created_at','desc')->paginate(12); 
             } 
         }else{
             $catid=$request->catid;
             if($state==""){
-                $products=DB::table('products')->join('stores', 'products.storeid', '=', 'stores.id')->where('category',$catid)->orderBy('products.created_at','desc')->paginate(12); 
+                $products=DB::table('products')->select('products.*','stores.id as storeid')->join('stores', 'products.storeid', '=', 'stores.id')->where('category',$catid)->orderBy('products.created_at','desc')->paginate(12); 
            }else{
-            $products=DB::table('products')->join('stores', 'products.storeid', '=', 'stores.id')->where([['products.category','=',$catid],['stores.state','=',$state]])->orderBy('products.created_at','desc')->paginate(12); 
+            $products=DB::table('products')->select('products.*','stores.id as storeid')->join('stores', 'products.storeid', '=', 'stores.id')->where([['products.category','=',$catid],['stores.state','=',$state]])->orderBy('products.created_at','desc')->paginate(12); 
             }
         }
         

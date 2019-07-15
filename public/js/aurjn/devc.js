@@ -1,16 +1,16 @@
 $(document).ready(() => {
     'use strict';
     console.log('APP STARTED')
-    // $('select').selectpicker();
+        // $('select').selectpicker();
 
     /**
      * PAGE LEVEL SCRIPTS
      * VENDOR PRODUCTS PAGE
      */
-    $('a[href="#vendorProductDetail"]').click(function (e) {
+    $('a[href="#vendorProductDetail"]').click(function(e) {
         /*
-        * GET THE ID OF THE CLICKED ITEM
-        */
+         * GET THE ID OF THE CLICKED ITEM
+         */
         let id = $(this).attr('product-id');
         let url = $('#productViewURLContainer').attr('data-location') + '/' + id;
         $('input[name=producttoupdate]').val(id);
@@ -43,7 +43,7 @@ $(document).ready(() => {
     /**
      * SUBMIT UPDATE FOR QUANTITY
      */
-    $('#vendorUpdateQuantity').submit(function (e) {
+    $('#vendorUpdateQuantity').submit(function(e) {
         e.preventDefault()
         let $this = $(this);
         let method = $this.attr('method');
@@ -85,13 +85,13 @@ $(document).ready(() => {
      * ADMIN COLOURS PAGE
      * Hold Currently Clicked Item to delete
      */
-    $('a[href="#deleteColourModal"]').click(function (e) {
+    $('a[href="#deleteColourModal"]').click(function(e) {
         let $this = $(this);
         let colour_id = $this.attr('colour-id');
         $('#confirmDeleteColour').attr('colour-id', colour_id);
     });
     //Confirm delete colour
-    $('a#confirmDeleteColour').click(function (e) {
+    $('a#confirmDeleteColour').click(function(e) {
         let $this = $(this);
         let id = $this.attr('colour-id');
         let url = $this.attr('href');
@@ -117,7 +117,7 @@ $(document).ready(() => {
             });
     });
 
-    $('#addColourForm').submit(function (e) {
+    $('#addColourForm').submit(function(e) {
         e.preventDefault()
         let $this = $(this);
         let url = $this.attr('action');
@@ -157,7 +157,7 @@ $(document).ready(() => {
             });
     })
 
-    $('a[href="#editColourModal"]').click(function (e) {
+    $('a[href="#editColourModal"]').click(function(e) {
         let id = e.currentTarget.getAttribute('colour-id')
         let colour = $(`li[colour-id=${id}]`).find(`.colour-name`).attr('id');
         $('#editColourForm').find('input[name=colour]').val(colour);
@@ -165,7 +165,7 @@ $(document).ready(() => {
         $('#editColourForm').attr('colour-id', id);
     });
 
-    $('#editColourForm').submit(function (e) {
+    $('#editColourForm').submit(function(e) {
         e.preventDefault();
         let $this = $(this)
         let id = $this.attr('colour-id');
@@ -204,13 +204,13 @@ $(document).ready(() => {
      * ADMIN SIZE PAGE
      * Hold Currently Clicked Item to delete
      */
-    $('a[href="#deleteSizeModal"]').click(function (e) {
+    $('a[href="#deleteSizeModal"]').click(function(e) {
         let $this = $(this);
         let size_id = $this.attr('size-id');
         $('#confirmDeleteSize').attr('size-id', size_id);
     });
     //Confirm delete colour
-    $('a#confirmDeleteSize').click(function (e) {
+    $('a#confirmDeleteSize').click(function(e) {
         let $this = $(this);
         let id = $this.attr('size-id');
         let url = $this.attr('href');
@@ -236,7 +236,7 @@ $(document).ready(() => {
             });
     });
 
-    $('#addSizeForm').submit(function (e) {
+    $('#addSizeForm').submit(function(e) {
         e.preventDefault()
         let $this = $(this);
         let url = $this.attr('action');
@@ -279,7 +279,7 @@ $(document).ready(() => {
             });
     })
 
-    $('a[href="#editSizeModal"]').click(function (e) {
+    $('a[href="#editSizeModal"]').click(function(e) {
         let id = e.currentTarget.getAttribute('size-id')
         let size = $(`li[size-id=${id}]`).find(`.size-name`).attr('id');
         $('#editSizeForm').find('input[name=size]').val(size);
@@ -287,7 +287,7 @@ $(document).ready(() => {
         $('#editSizeForm').attr('Size-id', id);
     });
 
-    $('#editSizeForm').submit(function (e) {
+    $('#editSizeForm').submit(function(e) {
         e.preventDefault();
         let $this = $(this)
         let id = $this.attr('size-id');
@@ -325,7 +325,7 @@ $(document).ready(() => {
      * ADMIN ADD PRODUCT PAGE.
      */
     //ADD A NEW FILE INPUT FIELD WHEN THE ADD BUTTON IS CLICKED
-    $('#moreAltPhoto').click(function (e) {
+    $('#moreAltPhoto').click(function(e) {
         $('.alternate-photos').append(`
         <div class="form-group">
               <label class="control-label" for="name">Alternate Photos</label>
@@ -335,7 +335,7 @@ $(document).ready(() => {
     });
 
     // ADD A NEW PRICE AND SIZE TO A PRODUCT
-    $('#addProductPriceForm').submit(function (e) {
+    $('#addProductPriceForm').submit(function(e) {
         e.preventDefault();
         let $this = $(this);
         let price = $this.find('input[name="price"]');
@@ -355,13 +355,11 @@ $(document).ready(() => {
         })
         disableForms();
 
-        fr(url, method,
-            {
+        fr(url, method, {
                 product_id: parseInt(product.val()),
                 price: parseFloat(price.val()),
                 size_id: parseInt(size),
-            }
-        )
+            })
             .then(res => {
                 console.log(res);
                 return res.json();
@@ -385,13 +383,13 @@ $(document).ready(() => {
     });
 
     //DELETEING A PRODUCT
-    $('i .delete-product').click(function (e) {
+    $('i .delete-product').click(function(e) {
         let $this = $(this);
         let id = $this.attr('id');
         console.log(id);
     });
 
-    $('#confirmDeleteProduct').click(function (e) {
+    $('#confirmDeleteProduct').click(function(e) {
         let id = $(this).attr('product-id');
         let url = $('#deleteProductModal').attr('action') + '/' + parseInt(id);
         console.log(url);
@@ -419,11 +417,11 @@ $(document).ready(() => {
 
 
     /*
-    * PAGE LEVEL SCRIPT
-    * VIEW PRODUCT ON MARKET
-    * */
+     * PAGE LEVEL SCRIPT
+     * VIEW PRODUCT ON MARKET
+     * */
     let product_to_cart = {};
-    $('.product-alt-photo').click(function (e) {
+    $('.product-alt-photo').click(function(e) {
         let url = $(this).attr('src');
 
         $('.product-alt-photo').removeClass('active');
@@ -433,15 +431,126 @@ $(document).ready(() => {
         fetchImageInBase64(url, main_photo);
     });
 
-    $('.product-purchase-colour').click(function (e) {
+    $('input[name="product-colour"]').click(function(e) {
         $('.product-purchase-colour').removeClass('active');
-        e.currentTarget.classList.add('active');
-        product_to_cart.colour = parseInt($(this).attr('value'));
+        $(this).parent().addClass('active');
+        product_to_cart.colour = parseInt($(this).val());
         product_to_cart.product_id = parseInt($('#addToCartForm').find('input[name=productid]').attr('value'));
         console.log(product_to_cart)
     });
 
-    $('#addToCartForm').find('input[name=size]').click(function (e) {
-        product_to_cart.size = parseInt($(this).attr('value'))
+    $('#addToCartForm').find('input[name=size]').click(function(e) {
+        product_to_cart.size = parseInt($(this).attr('value'));
     });
+    $('#addToCartForm').find('input[name="quantity"]').change(function(e) {
+        parseInt($(this).val()) < 1 ? $(this).val(1) : '';
+        product_to_cart.quantity = parseInt($(this).val())
+        console.log(product_to_cart)
+    });
+
+
+    $('button#addToCartButton').click(function(e) {
+        e.preventDefault();
+        if (!product_to_cart.product_id) {
+            product_to_cart.product_id = parseInt($('#addToCartForm').find('input[name=productid]').attr('value'));
+        }
+        //When the user clicks on add to cart without selecting a colour or size
+        if (!product_to_cart.quantity) {
+            product_to_cart.quantity = 1;
+        }
+
+        if ($('input[name="size"]')[0] && !product_to_cart.size) {
+            return alertify
+                .alert('Missing Data: ', "Please select a product size.");
+        }
+
+        if ($('input[name="product-colour"]')[0] && !product_to_cart.colour) {
+            return alertify
+                .alert('Missing Data: ', "Please select a product colour.");
+        }
+
+        product_to_cart.userid = parseInt($('meta[name="userid"]').attr('content'));
+        product_to_cart.session = $('meta[name="session"]').attr('content');
+        console.log(product_to_cart)
+        fr('/api/cart/product/add', "POST", product_to_cart)
+            .then(res => {
+                console.log(res);
+
+                return res.json();
+            })
+            .then(data => {
+                if (data.error) {
+                    alertify
+                        .alert('Add Product To Cart', data.error);
+                }
+                alertify
+                    .alert('Add Product To Cart', data.message);
+            });
+    });
+
+
+    /**
+     * PAGE LEVEL SCRIPT 
+     * VIEW CART
+     */
+
+
+
+
+    /**
+     * BEGIN PAYSTACK INTEGRATION
+     */
+    function payWithPaystack0001() {
+        var loanid = $("#mloanid").val();
+        var paymenttype = document.getElementById('paytype').value;
+        var fname = document.getElementById('paystackfname').value;
+        var lname = document.getElementById('paystacklname').value;
+
+        let userid = $('input[name="paystackuserid"]').val();
+
+        fr('/api/cart/verifypaymentamount', "POST", { userid })
+            .then(res => {
+                return res.json();
+            })
+            .then(data => {
+                if (data.error) {
+                    return alert('error occured');
+                }
+                if (!data.amount) {
+                    return alert('Could not resolve the order amount');
+                }
+
+                var handler = PaystackPop.setup({
+                    key: 'pk_live_5bc82598e87e6d7901b08a5aac99fdfc79fb0151', //public key, dont worry about this
+                    email: 'contact@figi.ng', //this should be users email, but replace it with a figi email
+
+                    amount: data.amount * 100, //amount is in kobo, so NGN * 100
+                    currency: "NGN",
+                    ref: '' + Math.floor((Math.random() * 1000000000) + 1), // generates a reference code. 
+                    //last paid generated ref by me: 716169799, save the code and remove this line.
+                    firstname: fname,
+                    lastname: lname,
+                    metadata: {
+                        custom_fields: [{
+                            display_name: fname + " " + lname,
+                            variable_name: "mobile_number", //no need to specify this field
+                            value: document.getElementById('paystackphone').value //user mobile number should be here
+                        }]
+                    },
+                    callback: function(response) {
+                        //alert('success. transaction ref is ' + response.reference);
+                        window.location = "{{URL::to('paystackpayment')}}?reference=" + response.reference + "&paymenttype=" + paymenttype + "&username=" + userid;
+                    },
+                    onClose: function() {;
+                    }
+                });
+                handler.openIframe();
+            });
+
+    };
+    /**
+     * END PAYSTACK PAYMENT
+     */
+
+
 });

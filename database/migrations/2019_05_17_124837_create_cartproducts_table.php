@@ -15,12 +15,14 @@ class CreateCartproductsTable extends Migration
     {
         Schema::create('cartproducts', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('cartid')->nullable();
-            $table->string('productid')->nullable();
-            $table->string('userid')->nullable();
-            $table->string('storeid')->nullable();
-            $table->string('categoryid')->nullable();
-            $table->string('cost')->nullable();
+            $table->unsignedBigInteger('cartid')->nullable();
+            $table->unsignedBigInteger('productid')->nullable();
+            $table->unsignedBigInteger('userid')->nullable();
+            $table->unsignedBigInteger('colourid')->nullable();
+            $table->unsignedBigInteger('sizeid')->nullable();
+            $table->unsignedBigInteger('storeid')->nullable();
+            $table->unsignedBigInteger('categoryid')->nullable();
+            $table->float('cost')->nullable();
             $table->timestamps();
         });
     }

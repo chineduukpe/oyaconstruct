@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+// use Symfony\Component\Routing\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,4 +32,9 @@ Route::group([],function(){
 
     Route::post('admin/product/price/add','ProductController@addProductPrice')->name('admin.product.price.add');
     Route::get('admin/product/delete/{product_id}','ProductController@deleteProduct')->name('admin.product.delete');
+    Route::patch('/admin/orders/deliver','AdminOrderController@deliverOrder')->name('admin.orders.deliver');
 });
+
+
+Route::post('cart/product/add','CartController@addProduct')->name('cart.products.add');
+Route::post('cart/verifypaymentamount','CartController@verifyCartPaymentAmount')->name('cart.verify.amount');

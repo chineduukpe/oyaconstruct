@@ -8,6 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Shop for construction materials online. Buy and order material. Create your store and have oyaconstruct buy from you." />
   <meta name="author" content="Oyaconstruct" />
+  <meta name="csrf-token" content="{{csrf_token()}}" />
     <!-- Font Awesome -->
   <link rel="stylesheet" href="{{ URL::asset('https://use.fontawesome.com/releases/v5.7.0/css/all.css') }}">
   <link href='http://fonts.googleapis.com/css?family=Lato&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
@@ -160,6 +161,24 @@
                 </li>
                 <li>
                   <a href="{{route('admin.sizes')}}">Size
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </li>
+
+          <!-- ORDERS -->
+          <li class="sidebar-dropdown">
+            <a href="#">
+              <i class="fa fa-store"></i>
+              <span>Orders</span>
+              <span class="badge badge-pill badge-warning">New</span>
+            </a>
+            <div class="sidebar-submenu">
+              <ul>
+                <li>
+                  <a href="{{route('admin.orders.view')}}">
+                    View Orders
                   </a>
                 </li>
               </ul>
@@ -373,6 +392,11 @@
     <script src="{{URL::asset('js/aurjn/devc.js')}}"></script>
 
  <script type="text/javascript">
+ $.ajaxSetup({
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+      });
     /*Scroll to top when arrow up clicked BEGIN*/
   $(window).scroll(function() {
       var height = $(window).scrollTop();

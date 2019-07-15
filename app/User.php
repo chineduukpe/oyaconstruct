@@ -48,4 +48,19 @@ class User extends Authenticatable
     {
         return $this->hasOne('App\store','owneremail','email');
     }
+
+    public function cart(){
+        return $this->hasOne('App\cart','userid');
+    }
+
+    public function session()
+    {
+        return $this->hasOne(Session::class);
+    }
+
+    public function orders()
+    {
+        return $this->hasMany('\App\Order','user_id');
+    }
+    // USER CAN HAVE MANY ORDERS HERE
 }

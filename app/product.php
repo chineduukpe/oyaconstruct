@@ -33,4 +33,8 @@ class product extends Model
         return $this->hasMany(ProductPrice::class);
     }
     
+    public function cartProduct()
+    {
+        return $this->belongsTo('App\cartproduct','productid');
+    }
 }

@@ -1,90 +1,92 @@
 /*CHANGE DEFAULT LARAVEL PAGINATION LINK LIST COLOR  */
-.pagination > li > a,
-.pagination > li > span {
-    color: #a01; 
 
+.pagination>li>a,
+.pagination>li>span {
+    color: #a01;
 }
 
-.page-item .active{
+.page-item .active {
     background-color: #a01;
     border-color: #a01;
     color: #fff;
 }
 
-.pagination > .active,
-.pagination > .active > a,
-.pagination > .active > a:focus,
-.pagination > .active > a:hover,
-.pagination > .active > span,
-.pagination > .active > span:focus,
-.pagination > .active > span:hover {
+.pagination>.active,
+.pagination>.active>a,
+.pagination>.active>a:focus,
+.pagination>.active>a:hover,
+.pagination>.active>span,
+.pagination>.active>span:focus,
+.pagination>.active>span:hover {
     background-color: #a01;
     border-color: #a01;
 }
 
-ul.list-striped{
+ul.list-striped {
     list-style-type: none;
     border: none;
 }
 
-ul.list-striped > li:nth-of-type(odd),
-ul.list-striped > li:nth-of-type(odd) > a{
+ul.list-striped>li:nth-of-type(odd),
+ul.list-striped>li:nth-of-type(odd)>a {
     background-color: #cccccc;
     border: none;
 }
 
-
-ul.list-striped > li{
+ul.list-striped>li {
     border-bottom: 1px solid rgb(211, 211, 211);
     border: none;
 }
 
-ul.list-striped > li > a:hover{
+ul.list-striped>li>a:hover {
     background-color: #eec9c9;
     border-color: #fff;
 }
 
 
 /*ADD PADDING TO TOP NAV WHEN ON MOBILE  */
-@media (max-width: 785px){
+
+@media (max-width: 785px) {
     nav {
         margin-top: 200px;
     }
-
 }
 
-
-.alt-image-container{
-   height: 100px !important;
+.alt-image-container {
+    height: 100px !important;
 }
 
-.alt-image{
+.alt-image {
     height: 100px !important;
     cursor: pointer;
     /*width: 100% !important;*/
 }
 
-.product-alt-photo{
+.product-alt-photo {
     cursor: pointer;
 }
 
-#productMainPhoto{
+#productMainPhoto {
     max-width: 100%;
 }
 
 .product-alt-photo:hover,
-.product-alt-photo.active{
-    border: 2px solid #ff4040;;
+.product-alt-photo.active {
+    border: 2px solid #ff4040;
+    ;
 }
 
 .product-purchase-colour:hover,
-.product-purchase-colour.active
-{
+.product-purchase-colour.active {
     border: 1px solid #ff4040;
 }
 
+
 /*START MAGNIFYING GLASS*/
-* {box-sizing: border-box;}
+
+* {
+    box-sizing: border-box;
+}
 
 .img-magnifier-container {
     position: relative;
@@ -100,4 +102,9 @@ ul.list-striped > li > a:hover{
     height: 100px;
 }
 
+
 /*END MAGNIGYING GLASS*/
+
+.cart-bg {
+    background: #dddddd !important;
+}

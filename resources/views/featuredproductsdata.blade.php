@@ -19,7 +19,7 @@ if($i==0){
         <span class="card-text">{{ $product->productname }}</span>
       </div>  
         <div class="d-flex justify-content-between align-items-center">
-          <small class="badge badge-pill badge-danger">&#8358;{{ number_format($product->price) }}</small>
+          <small class="badge badge-pill badge-danger">&#8358;{{ number_format($product->price,'2') }}</small>
            <div class="btn-group">
             <button type="button" class="btn btn-sm btn-danger">View</button>
           </div>
@@ -29,7 +29,7 @@ if($i==0){
 </div>
 </div>
 <?php 
-if($i>4){
+if($i>=4){
 ?>
 </div>
 <?php

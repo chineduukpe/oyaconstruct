@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -54,26 +56,27 @@ Route::get('/login', function () {
 Route::get('/signup', function () {
     return view('signup');
 });
-Route::post('/signup','UserController@signup');
-Route::post('/login','UserController@login');
+Route::post('/signup', 'UserController@signup');
+Route::post('/login', 'UserController@login');
 Route::get('/verifyemail', 'UserController@verifyemail');
 Route::post('/resetcode', 'UserController@resetcode');
 Route::get('/resetpassword', 'UserController@passwordreset');
-Route::get('/logout','UserController@logout');
-Route::get('/admin/users','UserController@allusers');
-Route::get('/admin/category', function () { return view('admin/category');});
-Route::post('/admin/addcategory','CategoryController@addcategory');
-Route::get('/admin/allcategories','CategoryController@allcategories');
-Route::get('/admin/addsubcat','CategoryController@addsubcat');
-Route::get('/admin/editcat','CategoryController@editcat');
-Route::get('/admin/viewsubcat','CategoryController@subcat_catid');
-Route::get('/admin/store','StoreController@allstores');
-Route::post('/admin/createstore','StoreController@createstore');
-Route::get('admin/product/{storeid}', ['uses' =>'ProductController@storeproducts']);
-Route::post('/admin/addproduct','ProductController@addproduct');
+Route::get('/logout', 'UserController@logout');
+Route::get('/admin/users', 'UserController@allusers');
+Route::get('/admin/category', function () {
+    return view('admin/category');
+});
+Route::post('/admin/addcategory', 'CategoryController@addcategory');
+Route::get('/admin/allcategories', 'CategoryController@allcategories');
+Route::get('/admin/addsubcat', 'CategoryController@addsubcat');
+Route::get('/admin/editcat', 'CategoryController@editcat');
+Route::get('/admin/viewsubcat', 'CategoryController@subcat_catid');
+Route::get('/admin/store', 'StoreController@allstores');
+Route::post('/admin/createstore', 'StoreController@createstore');
+Route::get('admin/product/{storeid}', ['uses' => 'ProductController@storeproducts']);
+Route::post('/admin/addproduct', 'ProductController@addproduct');
 
-Route::get('product/storage/{filename}', function ($filename)
-{
+Route::get('product/storage/{filename}', function ($filename) {
     $path = storage_path('/app/public/productpic/' . $filename);
 
     if (!File::exists($path)) {
@@ -89,71 +92,99 @@ Route::get('product/storage/{filename}', function ($filename)
     return $response;
 })->name('image.get');
 
-Route::get('admin/edituser','UserController@edituser');
-Route::get('admin/updateuser','UserController@updateuser');
-Route::get('admin/editstore','StoreController@editstore');
-Route::get('admin/updatestore','StoreController@updatestore');
-Route::post('editproductaltpic','ProductController@editproductaltpic');
-Route::post('editproductpic','ProductController@editproductpic');
-Route::post('editproddet','ProductController@editproddet');
-Route::get('prodbycategories','ProductController@prodbycategories');
-Route::post('managestock','ProductController@managestock');
-Route::post('manageprodpriv','ProductController@manageprodpriv');
-Route::get('getfeatured','ProductController@getfeatured');
-Route::get('featuredproducts','ProductController@featuredproducts');
-Route::get('getdiscount','ProductController@getdiscount');
-Route::get('flashsales','ProductController@flashsales');
-Route::get('getmore','ProductController@getmore');
-Route::get('shop','ProductController@shop');
-Route::get('/viewproduct/{id}', ['uses' =>'ProductController@singleproduct'])->name('product.view');
+Route::get('admin/edituser', 'UserController@edituser');
+Route::get('admin/updateuser', 'UserController@updateuser');
+Route::get('admin/editstore', 'StoreController@editstore');
+Route::get('admin/updatestore', 'StoreController@updatestore');
+Route::post('editproductaltpic', 'ProductController@editproductaltpic');
+Route::post('editproductpic', 'ProductController@editproductpic');
+Route::post('editproddet', 'ProductController@editproddet');
+Route::get('prodbycategories', 'ProductController@prodbycategories');
+Route::post('managestock', 'ProductController@managestock');
+Route::post('manageprodpriv', 'ProductController@manageprodpriv');
+Route::get('getfeatured', 'ProductController@getfeatured');
+Route::get('featuredproducts', 'ProductController@featuredproducts');
+Route::get('getdiscount', 'ProductController@getdiscount');
+Route::get('flashsales', 'ProductController@flashsales');
+Route::get('getmore', 'ProductController@getmore');
+Route::get('shop', 'ProductController@shop');
+Route::get('/viewproduct/{id}', ['uses' => 'ProductController@singleproduct'])->name('product.view');
 
 // MANAGER ROUTES
 Route::get('/manager/home', function () {
     return view('admin/home');
 });
-Route::get('manager/users',['uses' => 'UserController@allusers', 'name' => 'manager.users']);
-Route::get('manager/edituser','UserController@edituser');
-Route::get('manager/updateuser','UserController@updateuser');
-Route::get('manager/editstore','StoreController@editstore');
-Route::get('manager/updatestore','StoreController@updatestore');
-Route::get('/manager/users','UserController@allusers');
-Route::get('/manager/category', function () { return view('admin/category');});
-Route::post('/manager/addcategory','CategoryController@addcategory');
-Route::get('/manager/allcategories','CategoryController@allcategories');
-Route::get('/manager/addsubcat','CategoryController@addsubcat');
-Route::get('/manager/editcat','CategoryController@editcat');
-Route::get('/manager/viewsubcat','CategoryController@subcat_catid');
-Route::get('/manager/store','StoreController@allstores');
-Route::post('/manager/createstore','StoreController@createstore');
-Route::get('manager/product/{storeid}', ['uses' =>'ProductController@storeproducts']);
-Route::post('/manager/addproduct','ProductController@addproduct');
+Route::get('manager/users', ['uses' => 'UserController@allusers', 'name' => 'manager.users']);
+Route::get('manager/edituser', 'UserController@edituser');
+Route::get('manager/updateuser', 'UserController@updateuser');
+Route::get('manager/editstore', 'StoreController@editstore');
+Route::get('manager/updatestore', 'StoreController@updatestore');
+Route::get('/manager/users', 'UserController@allusers');
+Route::get('/manager/category', function () {
+    return view('admin/category');
+});
+Route::post('/manager/addcategory', 'CategoryController@addcategory');
+Route::get('/manager/allcategories', 'CategoryController@allcategories');
+Route::get('/manager/addsubcat', 'CategoryController@addsubcat');
+Route::get('/manager/editcat', 'CategoryController@editcat');
+Route::get('/manager/viewsubcat', 'CategoryController@subcat_catid');
+Route::get('/manager/store', 'StoreController@allstores');
+Route::post('/manager/createstore', 'StoreController@createstore');
+Route::get('manager/product/{storeid}', ['uses' => 'ProductController@storeproducts']);
+Route::post('/manager/addproduct', 'ProductController@addproduct');
 
 
 /*
 * ROUTES FOR ADMIN OPERATIONS
 */
-Route::get('/admin/stores/list',['as' => 'admin.stores.list', 'uses' => 'StoreController@listStores']);
-Route::get('/admin/colours',['as' => 'admin.colours', 'uses' => 'ColourController@index']);
-Route::get('/admin/sizes',['as' => 'admin.sizes', 'uses' => 'SizeController@index']);
-// Route::post('/admin/colours/delete',['as' => 'admin.colours.delete', 'uses' => 'ColourController@delete']);
+Route::get('/admin/stores/list', ['as' => 'admin.stores.list', 'uses' => 'StoreController@listStores']);
+Route::get('/admin/colours', ['as' => 'admin.colours', 'uses' => 'ColourController@index']);
+Route::get('/admin/sizes', ['as' => 'admin.sizes', 'uses' => 'SizeController@index']);
+Route::get('/admin/orders', 'AdminOrderController@viewAll')->name('admin.orders.view');
+Route::delete('/admin/orders/cancel','AdminOrderController@cancelOrder')->name('admin.orders.cancel');
+// Route::post('/admin/colours/delete',['as' => 'admin.colours.delete', 'us es' => 'ColourController@delete']);
 
+
+/**
+ * 
+ * CUSTOMER ROUTES FOR CUSTOMER OPERATIONS
+ */
+
+Route::get('/cart','CartController@viewCart')->name('customer.cart.view');
+Route::get('/{user_id}/cart/delete/{product_id}','CartController@deleteProduct')->name('customer.cart.delete.product');
+Route::get('/paystackpayment','CartController@verifyPaystackPayment');
+Route::post('/customer/cart/paycash','CartController@payCash')->name('customer.cart.paycash');
+Route::get('/customer/cart/receipt/{order_id}','CartController@printReceipt')->name('customer.orders.printreceipt');
+Route::get('/customer/orders','UserController@viewOrders')->name('customer.orders.view');
+Route::get('/customer/orders/cancel/{order_id}','UserController@cancelOrder')->name('customer.orders.cancel');
 
 /*
 * ROUTES FOR VENDOR OPERATIONS
-*/ 
+*/
 Route::post('/vendor/register',['as' => 'vendor.create', 'uses' => 'VendorController@register']);
 
-//GUARDED WITH VENDORONLY MIDDLEWARE TO ALLOW ONLY VENDORS ACCESS THE PAGES
+//GUAR DED WITH  VENDORON LY  MIDDLEWARE TO ALLOW ONLY VENDORS ACCESS THE P AGES
 Route::group(['middleware' => ['vendoronly','auth']],function(){
-    Route::put('/vendor/update/{vendor_id}',['as' => 'vendor.update', 'uses' => 'VendorController@update']);
+    Route::put('/vendor/ update/{vendor_id}',['as' => 'vendor.update', 'uses' => 'VendorController@update']);
     Route::get('vendor/home',['as' => 'vendor.home', 'uses' => 'VendorController@index']);
-    Route::get('vendor/settings',['as' => 'vendor.settings', 'uses' => 'VendorController@settings']);
-    Route::get('vendor/products',['as' => 'vendor.products', 'uses' => 'VendorController@products']);
+    Route::get('vendo r/settings',['as' => 'vendor.settings', 'uses' => 'VendorController@settings']);
+    Route::get('ven dor/products',['as' => 'vendor.products', 'uses' => 'VendorController@products']);
     Route::get('vendor/orders',['as' => 'vendor.orders', 'uses' => 'VendorController@orders']);
     // Route::get('vendor/products/update/quantity/{amount}',['as' => 'vendor.products.update.quantity', 'uses' => 'VendorController@updateProductQuantity']);
-    // Route::get('api/vendor/products/{product_id}',['as' => 'api.vendor.products.single', 'uses' => 'VendorController@singleProductAPI']);
+    // Route::get('api/vendor/products/{product_id}',['as' => 'api.vendor.products .single' ,  'uses' => 'VendorController@singleProductAPI']);
 });
 
+
+
+/**
+ *  DEBUG RO UT ES
+ */
 Route::get('/passwordz',function(){
-   return bcrypt('pandora007');
+    return bcrypt('pandora007');
+});
+
+Route::get('/test/user',function(){
+    // return Auth::user()->session()->first();
+    // return \App\User::find(23)->session()->first();
+    return session()->get('id');
 });

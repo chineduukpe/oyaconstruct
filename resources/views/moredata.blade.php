@@ -3,7 +3,11 @@
 <?php
 $pic=$product->productpic;
 $pid=$product->id;
-$soldpercent=($product->nosold/$product->quantity)*100;
+$soldpercent=0;
+if($product->quantity!=0){
+  $soldpercent=($product->nosold/$product->quantity)*100;
+}
+
 if($i==0){
 ?>
 <div class="row">
